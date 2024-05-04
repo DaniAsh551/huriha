@@ -1,0 +1,20 @@
+[package]
+name = "huriha"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+actix-http = "3.6.0"
+actix-service = "2.0.2"
+actix-web = "4.5.1"
+futures = "0.3.30"
+futures-util = "0.3.30"
+serde = { version = "1.0.200", features = ["derive"] }
+serde_json = "1.0.116"
+serde_with = "3.8.1"
+tempfile = "3.10.1"
+tokio = { version = "1.37.0", features = ["full"] }
+tokio-util = "0.7.10"
+uuid = "1.8.0"
