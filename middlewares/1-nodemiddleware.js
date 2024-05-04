@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const process = require("process");
+const fs = require("fs");
 
 /**
  * Represents metadata associated with a request or response.
@@ -7,8 +8,8 @@ const process = require("process");
  * @property {string} method - HTTP method (GET, POST, etc.).
  * @property {string} path - Request path.
  * @property {Object|Array} query - Query string parameters.
- * @property {string} reqBody - Path to the request body file.
- * @property {string} resBody - Path to the response body file.
+ * @property {string} req_body - Path to the request body file.
+ * @property {string} res_body - Path to the response body file.
  * @property {Object<string, string>} headers - Request headers.
  * @property {Object|Array} state - State information (initially empty).
  */
@@ -25,18 +26,34 @@ const process = require("process");
  * @type {Metadata}
  */
 const metadata = JSON.parse(process.argv.slice(2).join(" "));
+let terminate = false;
+/**
+ * Uncomment all the commented lines from here on if you want to respond with this middleware
+ */
+// fs.writeFileSync(metadata.res_body, `<html>
+// <head>
+//     <title>Response from Node</title>
+// </head>
+// <body>
+//     <p>This is a ${metadata.method} request to ${metadata.path}</p>
+// </body>
+// </html>`);
+//
+//terminate = true;
 
 function next() {
     /**
      * @type {ResponseObject}
      */
     const response = {
-        headers: {},
+        headers: { 
+            // "Content-Type": "text/html"
+        },
         state: {
             from: "node"
         },
         status: 200,
-        terminate: false
+        terminate
     };
     console.log(JSON.stringify(response));
 }
