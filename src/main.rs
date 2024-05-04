@@ -101,6 +101,11 @@ async fn execute_middlewares(mut metadata: Metadata) -> Result<MiddlewareOutput,
 
     // Execute each middleware executable in order
     for executable in executables {
+        // #region middleware profiling code 1
+        // let now = std::time::Instant::now();
+        // let exename = executable.to_str().unwrap().to_string();
+        // #endregion
+
         // Run the middleware executable and capture its output
         let output = Command::new(executable)
             .arg(serde_json::to_string(&metadata)?)
@@ -108,13 +113,17 @@ async fn execute_middlewares(mut metadata: Metadata) -> Result<MiddlewareOutput,
             .expect("Failed to parse command output");
 
         let output_str = String::from_utf8_lossy(&output.stdout).to_string();
-        println!("{}", output_str);
 
         // Parse the middleware output
         let middleware_output: MiddlewareOutput = serde_json::from_str(&output_str).unwrap();
 
         middleware_out = middleware_output;
         metadata.state = middleware_out.state.clone();
+
+        // #region middleware profiling code 1
+        // let elapsed = now.elapsed();
+        // println!("{:?} took {:?}ms", exename, elapsed.as_millis());
+        // #endregion
 
         // If the middleware signals termination, break out of the loop
         if middleware_out.terminate {
