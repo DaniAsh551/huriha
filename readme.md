@@ -1,6 +1,6 @@
 # Huriha: The Polyglot Web Server
 
-Welcome to Huriha, the web server that can already talk to middlewares written in any programming language! The name "Huriha" comes from the Dhivehi language, meaning "all" or "every" - a fitting name for the goal of building a server with all and every programming language.
+Welcome to Huriha, the web server that can already talk to middlewares written in any programming language! The name "Huriha" (pronounced "Hu-ri-haa") comes from the Dhivehi language, meaning "all" or "every" - a fitting name for the goal of building a server with all and every programming language.
 
 ## The Vision
 
@@ -16,7 +16,7 @@ To build Huriha, you'll need the latest stable version of Rust installed on your
 
 1. Clone this repository:
    ```
-   git clone https://github.com/your-username/huriha.git
+   git clone https://github.com/DaniAsh551/huriha.git
    ```
 
 2. Navigate to the project directory:
