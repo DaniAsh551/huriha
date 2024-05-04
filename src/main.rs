@@ -1,12 +1,12 @@
 mod metadata;
 mod middlewareoutput;
+mod util;
 use actix_http::StatusCode;
 use actix_web::web::BytesMut;
 use actix_web::{web, App, Error, HttpRequest, HttpResponse, HttpResponseBuilder, HttpServer};
 use tokio::fs::File;
 use std::env;
 use std::io::Write;
-use std::os::unix::fs::PermissionsExt;
 use std::path::Path;
 use std::process::Command;
 use serde_json::Value;
@@ -18,6 +18,7 @@ use tempfile::NamedTempFile;
 use tokio::io;
 use metadata::Metadata;
 use middlewareoutput::MiddlewareOutput;
+use util::is_executable;
 
 
 // Handle incoming HTTP requests
@@ -86,7 +87,7 @@ async fn execute_middlewares(mut metadata: Metadata) -> Result<MiddlewareOutput,
         .read_dir()?
         .filter_map(|entry| {
             let path = entry.ok()?.path();
-            if path.is_file() && path.metadata().unwrap().permissions().mode() & 0o111 != 0 {
+            if is_executable(&path) {
                 Some(path)
             } else {
                 // TODO: read res_body into stream and pass it to res
