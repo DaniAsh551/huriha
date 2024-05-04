@@ -2,6 +2,8 @@
 
 Welcome to Huriha, the web server that can already talk to middlewares written in any programming language! The name "Huriha" (pronounced "Hu-ri-haa") comes from the Dhivehi language, meaning "all" or "every" - a fitting name for the goal of building a server with all and every programming language.
 
+This project is built on top of the excellent Actix Web framework, which is a great choice for building web servers in Rust.
+
 ## The Vision
 
 Imagine a world where web servers are no longer constrained by the boundaries of a single language. Imagine a world where you can have a middleware written in Rust, another in Python, and yet another in Brainfuck (yes, really!). That's the dream I'm chasing with Huriha.
@@ -9,6 +11,9 @@ Imagine a world where web servers are no longer constrained by the boundaries of
 ## The Current State
 
 As of now, Huriha is just a tiny Rust embryo, but it's a start! I've got a basic server up and running, and it can execute middleware executables written in any language. The possibilities are endless, but I've only scratched the surface.
+
+## Performance
+Real world performance would probably depend on a lot of factors, like the languages you use for your middlewares and the work you do with them, the data clients submit and et cetera. In a small batch benchmark I did, with about 1000 requests and the example middlewares, it takes about `90ms` per request, where the node.js middleware takes `28.77ms` and the bash middleware takes `61.83ms`. So expect each middleware to give the performance a small hit. This test was done on a x86_64 Linux 6.8.7-200 machine equipped with an AMD Ryzen 7 5700G.
 
 ## Building Huriha
 
