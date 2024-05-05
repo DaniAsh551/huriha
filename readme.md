@@ -15,6 +15,9 @@ As of now, Huriha is just a tiny Rust embryo, but it's a start! I've got a basic
 ## Performance
 Real world performance would probably depend on a lot of factors, like the languages you use for your middlewares and the work you do with them, the data clients submit and et cetera. In a small batch benchmark I did, with about 1000 requests and the example middlewares, it takes about `90ms` per request, where the node.js middleware takes `28.77ms` and the bash middleware takes `61.83ms`. So expect each middleware to give the performance a small hit. This test was done on a x86_64 Linux 6.8.7-200 machine equipped with an AMD Ryzen 7 5700G.
 
+## Download
+To download the latest build, simply head to the [releases](https://github.com/DaniAsh551/huriha/releases). Currently, there are builds for gnu-linux and windows on x86_64.
+
 ## Building Huriha
 
 To build Huriha, you'll need the latest stable version of Rust installed on your system. Then, follow these simple steps:
