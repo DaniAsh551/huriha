@@ -2,6 +2,8 @@
 
 Welcome to Huriha, the web server that can already talk to middlewares written in any programming language! The name "Huriha" (pronounced "Hu-ri-haa") comes from the Dhivehi language, meaning "all" or "every" - a fitting name for the goal of building a server with all and every programming language.
 
+![Concept Art - Powered by AI](./images/huriha.png)
+
 This project is built on top of the excellent Actix Web framework, which is a great choice for building web servers in Rust.
 
 ## The Vision
