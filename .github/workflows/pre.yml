@@ -6,7 +6,7 @@ permissions:
 on:
   push:
     tags:
-      - pre-*
+      - v[0-99]+.*
 
 jobs:
   create-release:
