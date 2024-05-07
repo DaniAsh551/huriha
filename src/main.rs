@@ -26,6 +26,7 @@ async fn handle_request(req: HttpRequest, mut payload: web::Payload) -> Result<H
     // Create temporary files for request and response bodies
     let mut req_body_file = NamedTempFile::new().unwrap();
     let res_body_file = NamedTempFile::new().unwrap();
+    let res_body_str = res_body_file.path().to_str().unwrap().to_string();
 
     // Prepare metadata struct with request information
     let metadata = Metadata {
@@ -33,7 +34,7 @@ async fn handle_request(req: HttpRequest, mut payload: web::Payload) -> Result<H
         path: req.path().to_string(),
         query: req.query_string().parse().unwrap_or(Value::Object(Default::default())),
         req_body: req_body_file.path().to_str().unwrap().to_string(),
-        res_body: res_body_file.path().to_str().unwrap().to_string(),
+        res_body: res_body_str.clone(),
         headers: req.headers().iter().map(|(k, v)| (k.to_string(), v.to_str().unwrap().to_string())).collect(),
         state: Value::Object(Default::default()),
     };
@@ -62,7 +63,16 @@ async fn handle_request(req: HttpRequest, mut payload: web::Payload) -> Result<H
     }
 
     // Read response body from the temporary file and stream it in the response
-    let tokio_file = tokio::fs::File::from_std(res_body_file.into_file());
+    // follow symlinks
+    let abs_path = std::fs::canonicalize(res_body_str.clone()).unwrap().to_str().unwrap().to_string();
+    let is_symlink = abs_path.clone() != res_body_str.clone();
+    let tokio_file = if is_symlink {
+        //cleanup - ignore errors on cleanup
+        let _ = res_body_file.close().unwrap_or_default();
+        tokio::fs::File::open(abs_path).await.unwrap() 
+    } else {
+        tokio::fs::File::from_std(res_body_file.into_file())
+    };
     let frame = FramedRead::new(tokio_file, BytesCodec::new()).map_ok(BytesMut::freeze);
     let res = resp_builder.streaming(frame);
 
