@@ -1,15 +1,19 @@
 # Huriha: The Polyglot Web Server
 
 <div align="center">
-   ![GitHub Workflow]
-   ![Last Commit]
-   ![Top Language]
-   ![License]
-   ![Repo Size]
-   ![Work in Progress]
+
+   ![GitHub Workflow](https://github.com/DaniAsh551/huriha/actions/workflows/pre.yml/badge.svg)
+   ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/DaniAsh551/huriha/main)
+   ![GitHub top language](https://img.shields.io/github/languages/top/DaniAsh551/huriha)
+   ![License](https://img.shields.io/badge/license-fair_source-e87435)
+   ![GitHub repo size](https://img.shields.io/github/repo-size/DaniAsh551/huriha)
+   ![Work in Progress](https://img.shields.io/badge/WIP-violet)
+
 </div>
 
 Welcome to Huriha, the web server that can already talk to middlewares written in any programming language! The name "Huriha" (pronounced "Hu-ri-haa") comes from the Dhivehi language, meaning "all" or "every" - a fitting name for the goal of building a server with all and every programming language.
+
+![huriha](./images/huriha.png)
 
 This project is built on top of the excellent Actix Web framework, which is a great choice for building web servers in Rust.
 
